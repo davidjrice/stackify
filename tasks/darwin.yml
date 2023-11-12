@@ -6,3 +6,6 @@
 
 - name: Install Git MacOS
   ansible.builtin.include_tasks: modules/git/git.yml
+
+- name: Install PostgreSQL MacOS
+  ansible.builtin.include_tasks: modules/postgresql/postgresql.yml

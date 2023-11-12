@@ -9,6 +9,7 @@ Simplify setting up dev environments.
 - 💻 Supported Operating Systems
   - [x] MacOS 🍎
   - [x] Ubuntu 🐧
+  - [ ] Debian 🐧
 
 - 📦 System Package managers
   - [Homebrew](https://brew.sh/) (MacOS 🍎 only)
@@ -42,6 +43,10 @@ Simplify setting up dev environments.
     - [DataGrip](https://www.jetbrains.com/datagrip/)
     - [PyCharm](https://www.jetbrains.com/pycharm/)
     - [RubyMine](https://www.jetbrains.com/ruby/)
+
+- 🗄️ Databases
+  - [PostgreSQL](https://www.postgresql.org/) 🐘
+  - [MySQL](https://www.mysql.com/) 🐬
 
 
 ## TODO

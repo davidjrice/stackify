@@ -1,0 +1,4 @@
+- name: Install PostgreSQL on MacOS
+  community.general.homebrew:
+    name: postgresql
+    state: present

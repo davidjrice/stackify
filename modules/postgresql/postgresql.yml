@@ -1,0 +1,12 @@
+- name: Check if PostgreSQL is installed
+  ansible.builtin.command: psql --version
+  register: postgresql_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: postgresql_installed.rc != 0
+
+- name: Install PostgreSQL
+  vars:
+    module_name: "postgresql"
+  ansible.builtin.include_tasks: "{{ module_os_specific_tasks }}"
+  when: postgresql_installed.rc != 0

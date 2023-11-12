@@ -3,3 +3,6 @@
 
 - name: Install git on Ubuntu
   ansible.builtin.include_tasks: modules/git/git.yml
+
+- name: Install PostgreSQL Ubuntu
+  ansible.builtin.include_tasks: modules/postgresql/postgresql.yml

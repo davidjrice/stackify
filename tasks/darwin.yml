@@ -21,3 +21,9 @@
 
 - name: Install Python on MacOS
   ansible.builtin.include_tasks: modules/python/python.yml
+
+- name: Install rbenv on MacOS
+  ansible.builtin.include_tasks: modules/rbenv/rbenv.yml
+
+- name: Install Ruby on MacOS
+  ansible.builtin.include_tasks: modules/ruby/ruby.yml

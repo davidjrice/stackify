@@ -1,0 +1,21 @@
+- name: Check if rbenv is installed
+  ansible.builtin.command: rbenv --version
+  register: rbenv_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: rbenv_installed.rc != 0
+
+- name: Install rbenv
+  vars:
+    module_name: "rbenv"
+  ansible.builtin.include_tasks: "{{ module_os_specific_tasks }}"
+  when: rbenv_installed.rc != 0
+
+- name: Add rbenv initialization to bashrc
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    line: "{{ item }}"
+    create: true
+    mode: '0644'
+  loop:
+    - 'eval "$(rbenv init - )"'

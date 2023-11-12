@@ -1,0 +1,15 @@
+- name: Install rbenv dependencies on MacOS
+  community.general.homebrew:
+    name:
+      - openssl@3
+      - readline
+      - libyaml
+      - gmp
+    state: present
+
+- name: Install rbenv on MacOS
+  community.general.homebrew:
+    name:
+      - rbenv
+      - ruby-build
+    state: present

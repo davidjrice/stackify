@@ -1,0 +1,16 @@
+- name: Load Ruby variables
+  ansible.builtin.include_vars: ruby.vars.yml
+
+- name: Install Ruby versions with rbenv
+  ansible.builtin.include_tasks: ruby.install.yml
+  loop: "{{ ruby_versions }}"
+  register: ruby_versions_installed
+
+- name: Set Ruby version as global default  # noqa: no-handler
+  ansible.builtin.shell:
+    cmd: "{{ rbenv_binary[stackify_os_family] }} global {{ ruby_version_global }}"
+  args:
+    executable: /bin/bash
+  when: ruby_versions_installed.changed
+  register: ruby_global_set
+  changed_when: ruby_global_set.rc == 0

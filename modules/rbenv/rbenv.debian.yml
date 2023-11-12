@@ -1,0 +1,34 @@
+- name: Install dependencies for rbenv on Ubuntu
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ rbenv_dependencies }}"
+  vars:
+    rbenv_dependencies:
+      - autoconf
+      - patch
+      - build-essential
+      - rustc
+      - libssl-dev
+      - libyaml-dev
+      - libreadline6-dev
+      - zlib1g-dev
+      - libgmp-dev
+      - libncurses5-dev
+      - libffi-dev
+      - libgdbm6
+      - libgdbm-dev
+      - libdb-dev
+      - uuid-dev
+
+- name: Install rbenv
+  ansible.builtin.git:
+    repo: https://github.com/rbenv/rbenv.git
+    dest: ~/.rbenv
+  register: rbenv_installed
+
+- name: Install ruby-build
+  ansible.builtin.git:
+    repo: https://github.com/rbenv/ruby-build.git
+    dest: ~/.rbenv/plugins/ruby-build
+  register: ruby_build_installed

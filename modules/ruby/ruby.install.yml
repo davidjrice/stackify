@@ -1,0 +1,17 @@
+- name: Check if Ruby installed {{ item }}
+  ansible.builtin.shell: >-
+    {{ rbenv_binary[stackify_os_family] }} versions --bare | grep -q "{{ item }}"
+  register: ruby_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: ruby_installed.rc != 0
+
+- name: Install Ruby {{ item }}
+  ansible.builtin.command:
+    cmd: >-
+      {{ rbenv_binary[stackify_os_family] }} install {{ item }}
+  # environment:
+  #   PATH: "~/.rbenv/bin:{{ ansible_env.PATH }}"
+  register: new_ruby_installed
+  when: ruby_installed.rc != 0
+  changed_when: new_ruby_installed.rc != 0

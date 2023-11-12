@@ -4,7 +4,7 @@
 - name: Install OrbStack MacOS
   ansible.builtin.include_tasks: modules/orbstack/orbstack.yml
 
-- name: Install Git MacOS
+- name: Install git MacOS
   ansible.builtin.include_tasks: modules/git/git.yml
 
 - name: Install PostgreSQL MacOS
@@ -12,3 +12,6 @@
 
 - name: Install MySQL MacOS
   ansible.builtin.include_tasks: modules/mysql/mysql.yml
+
+- name: Install Redis MacOS
+  ansible.builtin.include_tasks: modules/redis/redis.yml

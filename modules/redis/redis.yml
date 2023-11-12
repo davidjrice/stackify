@@ -1,0 +1,12 @@
+- name: Check if Redis is installed
+  ansible.builtin.command: redis-cli --version
+  register: redis_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: redis_installed.rc != 0
+
+- name: Install redis
+  vars:
+    module_name: "redis"
+  ansible.builtin.include_tasks: "{{ module_os_specific_tasks }}"
+  when: redis_installed.rc != 0

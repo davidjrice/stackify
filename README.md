@@ -44,10 +44,10 @@ Simplify setting up dev environments.
     - [PyCharm](https://www.jetbrains.com/pycharm/)
     - [RubyMine](https://www.jetbrains.com/ruby/)
 
-- 🗄️ Databases
+- 💾 Databases
   - [PostgreSQL](https://www.postgresql.org/) 🐘
   - [MySQL](https://www.mysql.com/) 🐬
-
+  - [Redis](https://redis.io/) 🔥
 
 ## TODO
 

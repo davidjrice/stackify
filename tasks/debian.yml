@@ -9,3 +9,6 @@
 
 - name: Install MySQL on Ubuntu
   ansible.builtin.include_tasks: modules/mysql/mysql.yml
+
+- name: Install Redis on Ubuntu
+  ansible.builtin.include_tasks: modules/redis/redis.yml

@@ -27,6 +27,11 @@
     repo: https://github.com/pyenv/pyenv.git
     dest: ~/.pyenv
 
+- name: Update PATH for current session
+  set_fact:
+    ansible_env:
+      PATH: "{{ ansible_env.PATH }}:{{ pyenv_root }}/bin"
+
 # - name: Set PYENV_ROOT
 #   ansible.builtin.shell: export PYENV_ROOT="$HOME/.pyenv"
 

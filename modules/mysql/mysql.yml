@@ -1,0 +1,12 @@
+- name: Check if MySQL is installed
+  ansible.builtin.command: mysql --version
+  register: mysql_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: mysql_installed.rc != 0
+
+- name: Install MySQL
+  vars:
+    module_name: "mysql"
+  ansible.builtin.include_tasks: "{{ module_os_specific_tasks }}"
+  when: mysql_installed.rc != 0

@@ -9,3 +9,6 @@
 
 - name: Install PostgreSQL MacOS
   ansible.builtin.include_tasks: modules/postgresql/postgresql.yml
+
+- name: Install MySQL MacOS
+  ansible.builtin.include_tasks: modules/mysql/mysql.yml

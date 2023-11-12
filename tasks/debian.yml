@@ -6,3 +6,6 @@
 
 - name: Install PostgreSQL Ubuntu
   ansible.builtin.include_tasks: modules/postgresql/postgresql.yml
+
+- name: Install MySQL on Ubuntu
+  ansible.builtin.include_tasks: modules/mysql/mysql.yml

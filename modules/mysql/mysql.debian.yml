@@ -1,0 +1,10 @@
+- name: Install MySQL on Ubuntu
+  ansible.builtin.apt:
+    name: mysql-server
+    state: present
+
+- name: Install packages for MySQL bindings on Ubuntu
+  ansible.builtin.apt:
+    name:
+      - libmysqlclient-dev
+    state: present

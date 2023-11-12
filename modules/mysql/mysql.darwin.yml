@@ -1,0 +1,4 @@
+- name: Install MySQL on MacOS
+  community.general.homebrew:
+    name: mysql
+    state: present

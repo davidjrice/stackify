@@ -1,0 +1,9 @@
+- name: Install Docker on MacOS
+  community.general.homebrew:
+    name: docker
+    state: present
+
+- name: Install Docker Compose on MacOS
+  community.general.homebrew:
+    name: docker-compose
+    state: present

@@ -1,0 +1,14 @@
+- name: Load Docker variables
+  ansible.builtin.include_vars: docker.vars.yml
+
+- name: Check if Docker is installed
+  ansible.builtin.command: docker --version
+  register: docker_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: docker_installed.rc != 0
+
+- name: Install Docker
+  vars:
+    module_name: "docker"
+  ansible.builtin.include_tasks: "{{ module_os_specific_tasks }}"

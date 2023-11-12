@@ -1,0 +1,5 @@
+- name: Install Docker on Ubuntu
+  ansible.builtin.include_tasks: modules/docker/docker.yml
+
+- name: Install git on Ubuntu
+  ansible.builtin.include_tasks: modules/git/git.yml

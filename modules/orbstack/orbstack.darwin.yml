@@ -1,0 +1,4 @@
+- name: Install OrbStack on MacOS
+  community.general.homebrew:
+    name: orbstack
+    state: present

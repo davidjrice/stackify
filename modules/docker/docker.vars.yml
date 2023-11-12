@@ -1,0 +1,17 @@
+docker_dependencies:
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+docker_gpg_key_url: https://download.docker.com/linux/ubuntu/gpg
+docker_gpg_key_file: /etc/apt/keyrings/docker.gpg
+docker_gpg_key_file_tmp: /tmp/docker.gpg
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+docker_service_src: /home/ubuntu/docker.service
+docker_service_dest: /etc/systemd/system/docker.service
+ubuntu_url: https://download.docker.com/linux/ubuntu

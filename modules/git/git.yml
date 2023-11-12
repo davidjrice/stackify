@@ -1,0 +1,4 @@
+- name: Install git
+  vars:
+    module_name: "git"
+  ansible.builtin.include_tasks: "{{ module_os_specific_tasks }}"

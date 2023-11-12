@@ -1,0 +1,4 @@
+- name: Install git on MacOS
+  homebrew:
+    name: git
+    state: present

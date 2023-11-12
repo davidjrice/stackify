@@ -1,0 +1,70 @@
+- name: Install Docker dependencies
+  ansible.builtin.apt:
+    name: "{{ docker_dependencies }}"
+    state: present
+    update_cache: true
+  become: true
+
+- name: Check if Docker GPG key file exists
+  ansible.builtin.stat:
+    path: "{{ docker_gpg_key_file }}"
+  register: docker_gpg_key_file_stat
+
+- name: Download Docker GPG key
+  ansible.builtin.get_url:
+    url: "{{ docker_gpg_key_url }}"
+    dest: "{{ docker_gpg_key_file_tmp }}"
+    mode: '0644'
+  when: not docker_gpg_key_file_stat.stat.exists
+
+- name: Convert Docker GPG key to binary format
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o {{ docker_gpg_key_file }} {{ docker_gpg_key_file_tmp }}
+    creates: "{{ docker_gpg_key_file }}"
+  become: true
+  when: not docker_gpg_key_file_stat.stat.exists
+
+- name: Add Docker repository
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64 signed-by={{ docker_gpg_key_file }}] {{ ubuntu_url }} {{ ansible_distribution_release }} stable
+    state: present
+  become: true
+  register: apt_repository
+
+- name: Update APT sources
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+  when: apt_repository.changed
+
+- name: Install Docker Engine and CLI
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    state: present
+    update_cache: true
+  become: true
+
+# - name: Configure Docker on Ubuntu
+#   ansible.builtin.copy:
+#     src: "{{ docker_service_src }}"
+#     dest: "{{ docker_service_dest }}"
+#     owner: root
+#     group: root
+#     mode: '0644'
+
+- name: Ensure docker starts on startup
+  ansible.builtin.systemd:
+    name: docker
+    enabled: true
+
+- name: Ensure docker group exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add current user to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: true
+  become: true

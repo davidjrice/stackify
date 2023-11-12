@@ -1,0 +1,8 @@
+- name: Install Docker MacOS
+  ansible.builtin.include_tasks: modules/docker/docker.yml
+
+- name: Install OrbStack MacOS
+  ansible.builtin.include_tasks: modules/orbstack/orbstack.yml
+
+- name: Install Git MacOS
+  ansible.builtin.include_tasks: modules/git/git.yml

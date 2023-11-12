@@ -1,2 +1,3 @@
 stackify_os_family: "{{ ansible_os_family | lower }}"
 module_os_specific_tasks: "{{ 'modules/' + module_name + '/' + module_name + '.' + stackify_os_family + '.yml' }}"
+home: "{{ lookup('env', 'HOME') }}"

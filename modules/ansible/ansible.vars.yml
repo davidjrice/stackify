@@ -1,1 +1,1 @@
-ansible_collections_path: "{{ lookup('env', 'HOME') }}/.ansible/collections"
+ansible_collections_path: "{{ home }}/.ansible/collections"

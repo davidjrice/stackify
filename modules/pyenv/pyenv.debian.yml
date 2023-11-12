@@ -26,3 +26,20 @@
   ansible.builtin.git:
     repo: https://github.com/pyenv/pyenv.git
     dest: ~/.pyenv
+
+# - name: Set PYENV_ROOT
+#   ansible.builtin.shell: export PYENV_ROOT="$HOME/.pyenv"
+
+# - name: Update PATH
+#   ansible.builtin.shell: export PATH="$PYENV_ROOT/bin:$PATH"
+
+# - name: Update PATH for current session
+#   set_fact:
+#     ansible_env:
+#       PATH: "{{ home }}/.pyenv/bin:{{ ansible_env.PATH }}"
+
+# - name: Set PYENV_ROOT
+#   ansible.builtin.lineinfile:
+#     path: ~/.bashrc
+#     line: 'export PYENV_ROOT="$HOME/.pyenv"'
+#     create: yes

@@ -1,0 +1,13 @@
+FROM python:3.12.0-bullseye
+RUN pip install --upgrade pip
+WORKDIR /stackify
+COPY init.sh /stackify/
+
+RUN /stackify/init.sh --ansible
+
+COPY main.yml /main.yml
+COPY group_vars /group_vars
+COPY tasks /tasks
+COPY modules /modules
+
+CMD [ "bash" ]

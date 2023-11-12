@@ -1,7 +1,26 @@
 version: '3.8'
 services:
-  base:
+  base: &base
     platform: linux/amd64
-    build: .
+    build:
+      context: .
     volumes:
       - .:/stackify
+
+  # homebrew/brew:4.1.19
+  brew:
+    <<: *base
+    build:
+      dockerfile: Dockerfile.brew
+
+  # python:3.12.0-bullseye
+  debian:
+    <<: *base
+    build:
+      dockerfile: Dockerfile.debian
+
+  # ubuntu:20.04
+  ubuntu:
+    <<: *base
+    build:
+      dockerfile: Dockerfile.ubuntu

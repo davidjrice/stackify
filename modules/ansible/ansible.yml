@@ -1,0 +1,20 @@
+- name: Load Docker variables
+  ansible.builtin.include_vars: ansible.vars.yml
+
+- name: Ensure user ansible collections directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_collections_path }}"
+    state: directory
+    mode: '0700'
+
+- name: Check if community.general collection is installed
+  ansible.builtin.command:
+    cmd: ansible-galaxy collection list --collections-path "{{ ansible_collections_path }}"
+  register: installed_collections
+  changed_when: false
+
+- name: Install community.general collection
+  ansible.builtin.command:
+    cmd: ansible-galaxy collection install community.general --collections-path "{{ ansible_collections_path }}"
+  when: "'community.general' not in installed_collections.stdout"
+  changed_when: "'community.general' in installed_collections.stdout"

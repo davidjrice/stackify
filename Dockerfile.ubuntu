@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip
+RUN pip install --upgrade pip
+WORKDIR /stackify
+COPY init.sh /stackify/
+
+RUN /stackify/init.sh --ansible
+
+COPY main.yml /main.yml
+COPY group_vars /group_vars
+COPY tasks /tasks
+COPY modules /modules
+
+CMD [ "bash" ]

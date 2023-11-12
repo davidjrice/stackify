@@ -4,7 +4,7 @@ docker_dependencies:
   - gnupg
   - lsb-release
 docker_gpg_key_url: https://download.docker.com/linux/ubuntu/gpg
-docker_gpg_key_file: /etc/apt/keyrings/docker.gpg
+docker_gpg_key_file: "{{gpg_keyrings_dir}}/docker.gpg"
 docker_gpg_key_file_tmp: /tmp/docker.gpg
 docker_packages:
   - docker-ce
@@ -14,4 +14,10 @@ docker_packages:
   - docker-compose-plugin
 docker_service_src: /home/ubuntu/docker.service
 docker_service_dest: /etc/systemd/system/docker.service
-ubuntu_url: https://download.docker.com/linux/ubuntu
+gpg_keyrings_dir: /etc/apt/keyrings
+docker_base_url: https://download.docker.com/linux
+docker_url: "{{docker_base_url}}/{{ansible_distribution | lower}}"
+docker_repository: >-
+  deb [arch=amd64 signed-by={{ docker_gpg_key_file }}]
+  {{ docker_url }}
+  {{ ansible_distribution_release }} stable

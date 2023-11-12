@@ -5,6 +5,19 @@
     update_cache: true
   become: true
 
+- name: Check if gpg keyrings directory exists
+  ansible.builtin.stat:
+    path: "{{ gpg_keyrings_dir }}"
+  register: gpg_keyrings_dir_stat
+
+- name: Create gpg keyrings directory
+  ansible.builtin.file:
+    path: "{{ gpg_keyrings_dir }}"
+    state: directory
+    mode: '0755'
+  become: true
+  when: not gpg_keyrings_dir_stat.stat.exists
+
 - name: Check if Docker GPG key file exists
   ansible.builtin.stat:
     path: "{{ docker_gpg_key_file }}"
@@ -24,9 +37,13 @@
   become: true
   when: not docker_gpg_key_file_stat.stat.exists
 
+- name: Inspect variable
+  ansible.builtin.debug:
+    var: docker_repository
+
 - name: Add Docker repository
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64 signed-by={{ docker_gpg_key_file }}] {{ ubuntu_url }} {{ ansible_distribution_release }} stable
+    repo: "{{docker_repository}}"
     state: present
   become: true
   register: apt_repository

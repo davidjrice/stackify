@@ -45,11 +45,22 @@ function log_status {
     fi
 }
 
+function command_exists {
+    command -v $1 &>/dev/null
+}
+
+function check_and_log {
+    cmd=$1
+    command_exists $cmd
+    log_status $? "$cmd found" "$cmd not found"
+    return $?
+}
+
 function check_and_install {
     cmd=$1
     install_cmd=$2
 
-    if ! command -v $cmd &>/dev/null; then
+    if ! command_exists $cmd; then
         log "$cmd not found, installing..."
         eval $install_cmd
         log_status $? "$cmd installed successfully" "$cmd installation failed"
@@ -110,16 +121,69 @@ function set_python_version {
     pyenv global 3.12.0
 }
 
-function install_ansible {
+function install_ansible_brew {
     check_and_install "ansible" "brew install ansible"
+}
+
+function install_ansible_apt {
+    check_and_install "ansible" "apt install ansible"
+}
+
+
+function install_ansible_core {
+    check_and_install "ansible" "pip install ansible-core"
+}
+
+function install_ansible_core_pip3 {
+    check_and_install "ansible" "pip3 install ansible-core"
 }
 
 function run_ansible {
     ansible-playbook main.yml
 }
 
+function check_environment {
+    check_and_log "curl"
+    check_and_log "python"
+    check_and_log "pip"
+    check_and_log "pyenv"
+    check_and_log "brew"
+    check_and_log "ansible"
+}
+
+function python_env_exists {
+    check_and_log "python" && check_and_log "pip"
+}
+
+function python_env_macOS_exists {
+    check_and_log "python" && check_and_log "pip"
+}
+
+function install {
+    log "installing"
+    if python_env_exists; then
+        install_ansible_core
+    else
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            if python_env_macOS_exists; then
+                install_ansible_core_pip3
+            else
+                if ! check_and_log "brew"; then
+                    install_homebrew
+                fi
+                install_ansible_brew                    
+            fi
+        else
+            install_ansible_apt
+        fi
+    fi
+}
+
 
 case $1 in
+    --check-environment)
+        check_environment
+        ;;
     --brew)
         install_homebrew
         ;;
@@ -142,15 +206,17 @@ case $1 in
         set_python_version
         ;;
     --ansible)
-        install_ansible
+        install_ansible_core
         ;;
     "")
-        install_homebrew
-        update_homebrew
+        # install_homebrew
+        # update_homebrew
         # install_pyenv
         # install_python
         # set_python_version
-        install_ansible
+        # install_ansible
+        check_environment
+        install
         ;;
     *)
         echo "Invalid argument: $1"

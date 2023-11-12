@@ -1,0 +1,14 @@
+- name: Check if Python installed {{ item }}
+  ansible.builtin.shell: pyenv versions --bare | grep -q "{{ item }}"
+  register: python_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: python_installed.rc != 0
+
+- name: Install Python {{ item }}
+  ansible.builtin.command:
+    cmd: pyenv install {{ item }}
+  register: new_python_installed
+  when: python_installed.rc != 0
+  changed_when: new_python_installed.rc != 0
+

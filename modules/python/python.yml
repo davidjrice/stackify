@@ -1,0 +1,25 @@
+- name: Load Python variables
+  ansible.builtin.include_vars: python.vars.yml
+
+- name: Init pyenv
+  ansible.builtin.shell: |
+    set -o pipefail
+    pyenv init - | bash
+  changed_when: false
+
+- name: Install Python versions with pyenv
+  ansible.builtin.include_tasks: python.install.yml
+  loop: "{{ python_versions }}"
+
+#   environment:
+#     PATH: "{{ ansible_env.PATH }}:/root/.pyenv/bin"
+#   args:
+#     executable: /bin/bash
+
+# - name: Set Python version as global default
+#   ansible.builtin.shell:
+#     cmd: pyenv global {{ python_version }}
+#   environment:
+#     PATH: "{{ ansible_env.PATH }}:/root/.pyenv/bin"
+#   args:
+#     executable: /bin/bash

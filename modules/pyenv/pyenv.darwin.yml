@@ -1,0 +1,4 @@
+- name: Install pyenv on MacOS
+  community.general.homebrew:
+    name: pyenv
+    state: present

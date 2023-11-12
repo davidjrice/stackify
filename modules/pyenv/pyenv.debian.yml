@@ -1,0 +1,28 @@
+- name: Install dependencies for pyenv
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ pyenv_dependencies }}"
+  vars:
+    pyenv_dependencies:
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - wget
+      - curl
+      - llvm
+      - libncurses5-dev
+      - libncursesw5-dev
+      - xz-utils
+      - tk-dev
+      - libffi-dev
+      - liblzma-dev
+      - python-openssl
+
+- name: Install pyenv
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: ~/.pyenv

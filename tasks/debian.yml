@@ -4,7 +4,7 @@
 - name: Install git on Ubuntu
   ansible.builtin.include_tasks: modules/git/git.yml
 
-- name: Install PostgreSQL Ubuntu
+- name: Install PostgreSQL on Ubuntu
   ansible.builtin.include_tasks: modules/postgresql/postgresql.yml
 
 - name: Install MySQL on Ubuntu
@@ -12,3 +12,9 @@
 
 - name: Install Redis on Ubuntu
   ansible.builtin.include_tasks: modules/redis/redis.yml
+
+- name: Install pyenv on Ubuntu
+  ansible.builtin.include_tasks: modules/pyenv/pyenv.yml
+
+- name: Install Python on Ubuntu
+  ansible.builtin.include_tasks: modules/python/python.yml

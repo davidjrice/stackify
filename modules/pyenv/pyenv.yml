@@ -1,0 +1,22 @@
+- name: Check if pyenv is installed
+  ansible.builtin.command: pyenv --version
+  register: pyenv_installed
+  ignore_errors: true
+  failed_when: false
+  changed_when: pyenv_installed.rc != 0
+
+- name: Install pyenv
+  vars:
+    module_name: "pyenv"
+  ansible.builtin.include_tasks: "{{ module_os_specific_tasks }}"
+  when: pyenv_installed.rc != 0
+
+- name: Add pyenv initialization to bashrc
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    line: "{{ item }}"
+    create: true
+    mode: '0644'
+  loop:
+    - 'export PATH="$HOME/.pyenv/bin:$PATH"'
+    - 'eval "$(pyenv init -)"'

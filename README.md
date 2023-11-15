@@ -54,10 +54,10 @@ Simplify setting up dev environments.
 - [ ] Zsh
 - [ ] Oh My Zsh
 - [ ] Powerlevel10k
-- [ ] Python
-    - [ ] pyenv
-- [ ] Ruby
-    - [ ] rbenv
+- [x] Python
+    - [x] pyenv
+- [x] Ruby
+    - [x] rbenv
 - [ ] Go
 - [ ] Node.js
 - [ ] IDEs

@@ -1,6 +1,6 @@
 [project]
 name = "stackify"
-version = "0.0.1"
+version = "0.0.2"
 description = "Simplify developer enviroment setup"
 authors = [
   { name = "David Rice", email = "me@davidjrice.co.uk" },
@@ -23,7 +23,7 @@ dependencies = [
 "Bug Tracker" = "https://github.com/davidjrice/stackify/issues"
 
 [project.scripts]
-autopytest = "stackify.cli:main"
+stackify = "stackify.cli:main"
 
 [build-system]
 requires = ["hatchling"]

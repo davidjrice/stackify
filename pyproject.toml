@@ -1,0 +1,30 @@
+[project]
+name = "stackify"
+version = "0.0.1"
+description = "Simplify developer enviroment setup"
+authors = [
+  { name = "David Rice", email = "me@davidjrice.co.uk" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.10"
+dependencies = [
+  "ansible-core==2.16.0",
+  "ansible_runner==2.3.4",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/davidjrice/stackify"
+"Bug Tracker" = "https://github.com/davidjrice/stackify/issues"
+
+[project.scripts]
+autopytest = "stackify.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -15,3 +15,9 @@ ubuntu.build:
 
 ubuntu.run: ubuntu.build
 	@docker-compose run --rm ubuntu
+
+build:
+	@hatch build .
+
+stackify:
+	@python -m stackify.cli

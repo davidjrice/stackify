@@ -19,7 +19,7 @@ jobs:
       - name: Install Commitizen
         run: pip install commitizen
       - name: Create release
-        uses: commitizen-tools/commitizen-action@v1
+        uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.COMMITIZEN_TOKEN }}
           changelog_increment_filename: body.md

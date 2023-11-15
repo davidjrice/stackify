@@ -4,6 +4,13 @@
 
 Simplify setting up dev environments.
 
+## Install
+
+```bash
+pip install stackify
+stackify
+```
+
 ## Features
 
 - 💻 Supported Operating Systems

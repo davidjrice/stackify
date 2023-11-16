@@ -195,10 +195,8 @@ function install {
                 install_stackify
             fi
         fi
-        stackify
-    else
-        stackify
     fi
+    stackify
 }
 
 

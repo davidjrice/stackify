@@ -80,6 +80,12 @@ function update_homebrew {
     fi
 }
 
+function install_xcode {
+    log "installing xcode..."
+    xcode-select --install
+    log_status $? "xcode installed successfully" "xcode installation failed"
+}
+
 function install_homebrew {
     check_and_install "brew" "/bin/bash -c \"$(curl -fsSL $BREW_INSTALL_URL)\""
 }
@@ -138,6 +144,14 @@ function install_ansible_core_pip3 {
     check_and_install "ansible" "pip3 install ansible-core"
 }
 
+function install_stackify {
+    check_and_install "stackify" "pip install stackify"
+}
+
+function install_stackify_pip3 {
+    check_and_install "stackify" "pip3 install stackify"
+}
+
 function run_ansible {
     ansible-playbook main.yml
 }
@@ -160,22 +174,30 @@ function python_env_macOS_exists {
 }
 
 function install {
-    log "installing"
-    if python_env_exists; then
-        install_ansible_core
-    else
-        if [[ "$OSTYPE" == "darwin"* ]]; then
-            if python_env_macOS_exists; then
-                install_ansible_core_pip3
-            else
-                if ! check_and_log "brew"; then
-                    install_homebrew
-                fi
-                install_ansible_brew                    
-            fi
+    if ! check_and_log "stackify"; then
+        log "installing"
+        if python_env_exists; then
+            install_stackify
         else
-            install_ansible_apt
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                if python_env_macOS_exists; then
+                    install_stackify_pip3
+                else
+                    if ! check_and_log "xcode-select -p"; then
+                        install_xcode
+                    fi
+                    if ! check_and_log "brew"; then
+                        install_homebrew
+                    fi
+                    install_stackify_pip3
+                fi
+            else
+                install_stackify
+            fi
         fi
+        stackify
+    else
+        stackify
     fi
 }
 

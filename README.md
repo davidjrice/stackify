@@ -7,6 +7,10 @@ Simplify setting up dev environments.
 ## Install
 
 ```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/davidjrice/stackify/main/init.sh)"
+```
+
+```bash
 pip install stackify
 stackify
 ```

@@ -9,7 +9,8 @@ __pycache__/
 # Distribution / packaging
 *.whl
 *.tar.gz
-artifacts
+build
+*.egg-info
 
 # Unit test / coverage reports
 .tox/
@@ -36,3 +37,6 @@ __pypackages__/
 
 # pytype static type analyzer
 .pytype/
+
+# ansible
+artifacts

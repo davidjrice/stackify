@@ -15,7 +15,7 @@ class Stackify():
 
     def __init__(self) -> None:
         self.log.debug("initializing")
-        self.path = Path(__file__).resolve().parent.parent
+        self.path = Path(__file__).resolve().parent.joinpath("ansible")
 
     @property
     def log(self) -> logging.Logger:
@@ -23,6 +23,7 @@ class Stackify():
 
     def run(self) -> None:
         self.log.info("running")
+        self.log.info("path={path}".format(path=self.path))
         r = ansible_runner.run(private_data_dir=self.path, playbook='main.yml')
         self.log.info("status={status}: exit_code={exit_code}".format(status=r.status, exit_code=r.rc))
         self.log.info("final status {stats}".format(stats=r.stats))

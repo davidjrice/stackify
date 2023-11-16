@@ -1,5 +1,7 @@
-## 0.0.2 (2023-11-16)
+## 0.0.1 (2023-11-15)
 
 ### Fix
 
-- try removing changelog entirely
+- pyenv path
+- use full path to pyenv to prevent failures if just installed
+- add the main darwin tasks file

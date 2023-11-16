@@ -52,8 +52,9 @@ function command_exists {
 function check_and_log {
     cmd=$1
     command_exists $cmd
-    log_status $? "$cmd found" "$cmd not found"
-    return $?
+    status=$?
+    log_status $status "$cmd found" "$cmd not found"
+    return $status
 }
 
 function check_and_install {

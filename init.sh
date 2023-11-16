@@ -196,7 +196,6 @@ function install {
             fi
         fi
     fi
-    stackify
 }
 
 
@@ -237,6 +236,7 @@ case $1 in
         # install_ansible
         check_environment
         install
+        stackify
         ;;
     *)
         echo "Invalid argument: $1"

@@ -1,6 +1,6 @@
 [project]
 name = "stackify"
-version = "0.0.1"
+version = "0.0.2"
 description = "Simplify developer enviroment setup"
 authors = [
   { name = "David Rice", email = "me@davidjrice.co.uk" },
@@ -32,7 +32,7 @@ build-backend = "hatchling.build"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.1"
+version = "0.0.2"
 version_files = [
     "pyproject.toml:^version"
 ]

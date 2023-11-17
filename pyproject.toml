@@ -1,7 +1,7 @@
 [project]
 name = "stackify"
 version = "0.0.3"
-description = "Simplify developer enviroment setup"
+description = "Simplify developer environment setup"
 authors = [
   { name = "David Rice", email = "me@davidjrice.co.uk" },
 ]

@@ -88,7 +88,7 @@ function install_xcode {
 }
 
 function install_homebrew {
-    check_and_install "brew" "/bin/bash -c \"$(curl -fsSL $BREW_INSTALL_URL)\""
+    check_and_install "brew" '/bin/bash -c "$(curl -fsSL $BREW_INSTALL_URL)"'
 }
 
 function brew_install {

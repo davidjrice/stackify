@@ -24,6 +24,6 @@ class Stackify():
     def run(self) -> None:
         self.log.info("running")
         self.log.info("path={path}".format(path=self.path))
-        r = ansible_runner.run(private_data_dir=self.path, playbook='main.yml')
+        r = ansible_runner.run(private_data_dir=self.path, playbook='main.yml', verbosity=3)
         self.log.info("status={status}: exit_code={exit_code}".format(status=r.status, exit_code=r.rc))
         self.log.info("final status {stats}".format(stats=r.stats))

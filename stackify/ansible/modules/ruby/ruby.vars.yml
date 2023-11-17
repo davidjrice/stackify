@@ -1,7 +1,11 @@
 rbenv_binary:
-  darwin: "/opt/homebrew/bin/rbenv"
-  debian: "~/.rbenv/bin/rbenv"
+  darwin:
+    x86_64: "/usr/local/bin/rbenv"
+    arm64: "/opt/homebrew/bin/rbenv"
+  debian:
+    x86_64: "~/.rbenv/bin/rbenv"
 ruby_version_global: 3.2.2
 ruby_versions:
   - 3.2.2
   - 3.1.4
+

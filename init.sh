@@ -174,14 +174,26 @@ function python_env_macOS_exists {
     check_and_log "python" && check_and_log "pip"
 }
 
+function check_python_version {
+    local python_version=$(python --version 2>&1 | cut -d " " -f 2)
+    local major_version=$(echo $python_version | cut -d "." -f 1)
+    local minor_version=$(echo $python_version | cut -d "." -f 2)
+
+    if [ $major_version -gt 3 ] || ([ $major_version -eq 3 ] && [ $minor_version -ge 10 ]); then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function install {
     if ! check_and_log "stackify"; then
         log "installing"
-        if python_env_exists; then
+        if python_env_exists && check_python_version; then
             install_stackify
         else
             if [[ "$OSTYPE" == "darwin"* ]]; then
-                if python_env_macOS_exists; then
+                if python_env_macOS_exists && check_python_version; then
                     install_stackify_pip3
                 else
                     if ! check_and_log "xcode-select -p"; then
@@ -190,6 +202,9 @@ function install {
                     if ! check_and_log "brew"; then
                         install_homebrew
                     fi
+                    install_pyenv_dependencies
+                    install_pyenv
+                    install_python
                     install_stackify_pip3
                 fi
             else

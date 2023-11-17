@@ -46,12 +46,12 @@ function log_status {
 }
 
 function command_exists {
-    command -v $1 &>/dev/null
+    command -v "$1" &>/dev/null
 }
 
 function check_and_log {
     cmd=$1
-    command_exists $cmd
+    command_exists "$cmd"
     status=$?
     log_status $status "$cmd found" "$cmd not found"
     return $status
@@ -61,9 +61,9 @@ function check_and_install {
     cmd=$1
     install_cmd=$2
 
-    if ! command_exists $cmd; then
+    if ! command_exists "$cmd"; then
         log "$cmd not found, installing..."
-        eval $install_cmd
+        eval "$install_cmd"
         log_status $? "$cmd installed successfully" "$cmd installation failed"
     else
         log "$cmd already installed"
@@ -93,10 +93,10 @@ function install_homebrew {
 
 function brew_install {
     local package=$1
-    if brew list --versions $package > /dev/null; then
+    if brew list --versions "$package" > /dev/null; then
         echo "$package is already installed"
     else
-        brew install $package
+        brew install "$package"
     fi
 }
 

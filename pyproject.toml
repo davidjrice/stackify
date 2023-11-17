@@ -1,6 +1,6 @@
 [project]
 name = "stackify"
-version = "0.0.4"
+version = "0.0.5"
 description = "Simplify developer environment setup"
 authors = [
   { name = "David Rice", email = "me@davidjrice.co.uk" },
@@ -31,7 +31,7 @@ requires = ["setuptools", "wheel"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.4"
+version = "0.0.5"
 version_files = [
     "pyproject.toml:^version"
 ]

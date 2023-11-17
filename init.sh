@@ -205,10 +205,10 @@ function install {
                     install_pyenv_dependencies
                     install_pyenv
                     install_python
-                    install_stackify_pip3
+                    init_pyenv
+                    set_python_version
+                    install_stackify
                 fi
-            else
-                install_stackify
             fi
         fi
     fi

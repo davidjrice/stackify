@@ -32,7 +32,7 @@
     host: currentHost
     key: autoLoginUser
     type: string
-    value: "{{ ansible_user }}"
+    value: "{{ lookup('env', 'USER') }}"
     array_add: yes
     path: "~/stackify.sh"
   when: ansible_os_family == 'Darwin'

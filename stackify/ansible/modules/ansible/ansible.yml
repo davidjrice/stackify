@@ -14,7 +14,7 @@
   changed_when: false
 
 - name: Install community.general collection
-  ansible.builtin.command:
+  ansible.builtin.shell:
     cmd: ansible-galaxy collection install community.general --collections-path "{{ ansible_collections_path }}"
   register: installed_community_general
   when: "'community.general' not in installed_collections.stdout"

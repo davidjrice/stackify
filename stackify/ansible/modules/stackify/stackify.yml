@@ -1,0 +1,38 @@
+- name: Check if latest stackify version is installed
+  ansible.builtin.pip:
+    name: "{{ item.name }}=={{ item.version }}"
+    state: present
+  register: stackify_version
+  with_items:
+    - { name: 'stackify', version: '0.0.4' }
+  ignore_errors: true
+
+- name: Reload ansible
+  ansible.builtin.meta: refresh_inventory
+  when: stackify_version.changed
+  changed_when: false
+
+- name: Create Stackify script
+  ansible.builtin.copy:
+    dest: "~/stackify.sh"
+    content: |
+      #!/bin/bash
+      stackify
+    mode: '0755'
+
+- name: Add Stackify script to startup applications (Ubuntu)
+  ansible.builtin.copy:
+    src: "~/stackify.sh"
+    dest: "~/.config/autostart/stackify.sh"
+  when: ansible_os_family == 'Debian'
+
+- name: Add Stackify script to login items (macOS)
+  ansible.builtin.osx_defaults:
+    domain: com.apple.loginitems
+    host: currentHost
+    key: autoLoginUser
+    type: string
+    value: "{{ ansible_user }}"
+    array_add: yes
+    path: "~/stackify.sh"
+  when: ansible_os_family == 'Darwin'

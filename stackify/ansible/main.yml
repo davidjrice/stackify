@@ -10,5 +10,8 @@
     - name: Setup ansible
       ansible.builtin.include_tasks: modules/ansible/ansible.yml
 
+    - name: Setup stackify
+      ansible.builtin.include_tasks: modules/stackify/stackify.yml
+
     - name: Include OS specific tasks
       ansible.builtin.include_tasks: "{{ os_tasks[stackify_os_family] }}"
